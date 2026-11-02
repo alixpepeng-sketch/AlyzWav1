@@ -452,7 +452,7 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send {
 
 #roomMsgs {
     position: absolute;
-    top: 68px; bottom: 71px; /* 68px (top) + 71px (bottom) */
+    top: 68px; bottom: 71px;
     left: 0; right: 0;
     overflow-y: auto;
     overflow-x: hidden;
@@ -585,10 +585,8 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send {
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 
-<!-- APP CONTAINER (CHROME FIT) -->
 <div id="app">
 
-    <!-- PAGE 1: LOGIN -->
     <div id="page-login" class="page">
         <div id="loginBg" class="fixed-bg"></div>
         <div class="wrap-auth">
@@ -611,7 +609,6 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send {
         </div>
     </div>
 
-    <!-- PAGE 2: VERIFY -->
     <div id="page-verify" class="page">
         <div class="wrap-auth" style="background: #000;">
             <b class="title-main">VERIFIKASI OTP</b>
@@ -636,7 +633,6 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send {
         </div>
     </div>
 
-    <!-- PROCESS LOADER -->
     <div id="overlayProcess" class="overlayModal">
         <div class="modalCard">
             <div class="loader"></div>
@@ -645,7 +641,6 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send {
         </div>
     </div>
 
-    <!-- PAGE 3: BERANDA -->
     <div id="page-beranda" class="page">
         <div id="berandaBg" class="fixed-bg"></div>
         
@@ -668,9 +663,7 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send {
             </div>
         </div>
         
-        <div id="berandaList">
-            <!-- Rendered via JS -->
-        </div>
+        <div id="berandaList"></div>
         
         <div class="navWrap">
             <div class="nav">
@@ -689,7 +682,6 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send {
         </div>
     </div>
 
-    <!-- PAGE 4: PROFIL -->
     <div id="page-profil" class="page">
         <div id="profilBg" class="fixed-bg"></div>
         <div class="top-profil"><b>PROFIL</b></div>
@@ -729,7 +721,6 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send {
         </div>
     </div>
 
-    <!-- PAGE 5: ROOM -->
     <div id="page-room" class="page">
         <div id="roomBg" class="fixed-bg"></div>
         
@@ -744,9 +735,7 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send {
             </div>
         </div>
         
-        <div id="roomMsgs">
-            <!-- Rendered by JS -->
-        </div>
+        <div id="roomMsgs"></div>
         
         <div class="bottom-room">
             <div class="plus" onclick="document.getElementById('fileInput').click()">
@@ -764,7 +753,6 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send {
         </div>
     </div>
 
-    <!-- MODAL 1: ADD KONTAK -->
     <div id="overlayAdd" class="overlayModal" onclick="if(event.target==this) closeModals()">
         <div class="modalCard">
             <b class="modalTitle">TAMBAH KONTAK</b>
@@ -777,7 +765,6 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send {
         </div>
     </div>
 
-    <!-- MODAL 2: GANTI WALLPAPER -->
     <div id="overlayBG" class="overlayModal" onclick="if(event.target==this) closeModals()">
         <div class="modalCard">
             <b class="modalTitle">GANTI WALLPAPER</b>
@@ -790,7 +777,6 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send {
         </div>
     </div>
 
-    <!-- MODAL 3: GANTI FOTO PROFIL -->
     <div id="overlayPhoto" class="overlayModal" onclick="if(event.target==this) closeModals()">
         <div class="modalCard">
             <b class="modalTitle">FOTO PROFIL</b>
@@ -803,28 +789,25 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send {
         </div>
     </div>
 
-</div> <!-- END #APP CONTAINER -->
+</div>
 
-<!-- =========================================
-     JAVASCRIPT LOGIC (ES5)
-========================================= -->
 <script>
-/* 1. CONFIG FIREBASE (GANTI DENGAN MILIKMU AGAR BISA OFFLINE) */
+/* INI SUDAH DIGABUNG DI HTML - FIXED */
 var firebaseConfig = {
-    apiKey: "AIzaSyXXXX_GANTI_DENGAN_API_KEY_MU",
-    authDomain: "project-id-mu.firebaseapp.com",
-    databaseURL: "https://project-id-mu-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "project-id-mu",
-    storageBucket: "project-id-mu.appspot.com",
-    messagingSenderId: "1234567890",
-    appId: "1:1234567890:web:abcdef123456"
+  apiKey: "AIzaSyAyKw5JZ-VlTs8wK40E2Z6pJH_3wCSF0U8",
+  authDomain: "web-store-12856.firebaseapp.com",
+  databaseURL: "https://web-store-12856-default-rtdb.firebaseio.com",
+  projectId: "web-store-12856",
+  storageBucket: "web-store-12856.firebasestorage.app",
+  messagingSenderId: "72980085852",
+  appId: "1:72980085852:web:9f30a318b821adacc83a99",
+  measurementId: "G-QVLQJF61NK"
 };
 
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 window.auth = firebase.auth();
 window.db = firebase.database();
 
-/* 2. GLOBAL STATE */
 var myId = localStorage.getItem('uid') || '';
 var myNomer = localStorage.getItem('nomer') || '';
 var currentTargetNomer = '';
@@ -834,7 +817,6 @@ var usersMeta = {};
 var timerInt;
 var lastSeenTimeout;
 
-/* 3. KEYBOARD & SCROLL FIX (SEMPURNA UNTUK CHROME) */
 var appEl = document.getElementById('app');
 var roomInp = document.getElementById('roomInp');
 var roomMsgs = document.getElementById('roomMsgs');
@@ -852,7 +834,6 @@ roomInp.addEventListener('focus', function(){
     }, 300);
 });
 
-/* 4. ROUTING & UI HELPERS */
 function showPage(id) {
     var pages = document.querySelectorAll('.page');
     for (var i=0; i<pages.length; i++) {
@@ -923,7 +904,6 @@ function formatPhone(num) {
     return num; 
 }
 
-/* 5. AUTHENTICATION (OTP) */
 function kirimOTP() {
     var nama = document.getElementById('loginNama').value; 
     var nomer = document.getElementById('loginNomer').value;
@@ -1023,7 +1003,6 @@ function doLogout() {
     showPage('page-login');
 }
 
-/* 6. REALTIME DATABASE LOGIC */
 function setOnlineStatus() {
     if(!myId) return; 
     var ref = db.ref('users/' + myId);
@@ -1135,7 +1114,6 @@ function renderList() {
     listEl.innerHTML = html;
 }
 
-/* 7. ROOM & MESSAGING */
 var roomMsgsRef;
 
 function openRoom(targetNomer) {
@@ -1243,7 +1221,6 @@ function sendFile(e) {
     reader.readAsDataURL(file);
 }
 
-/* 8. INISIALISASI HALAMAN PERTAMA KALI */
 if (localStorage.getItem('uid')) { 
     initApp(); 
     showPage('page-beranda'); 
