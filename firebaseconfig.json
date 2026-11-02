@@ -1,0 +1,15 @@
+var firebaseConfig = {
+  apiKey: "AIzaSyAyKw5JZ-VlTs8wK40E2Z6pJH_3wCSF0U8",
+  authDomain: "web-store-12856.firebaseapp.com",
+  databaseURL: "https://web-store-12856-default-rtdb.firebaseio.com",
+  projectId: "web-store-12856",
+  storageBucket: "web-store-12856.firebasestorage.app",
+  messagingSenderId: "72980085852",
+  appId: "1:72980085852:web:9f30a318b821adacc83a99",
+  measurementId: "G-QVLQJF61NK"
+};
+
+firebase.initializeApp(firebaseConfig);
+var auth = firebase.auth();
+var db = firebase.database();
+// analytics ga usah dipakai di APK biar ringan, hapus aja getAnalytics
