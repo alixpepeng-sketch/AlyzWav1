@@ -1,3 +1,4 @@
+// Firebase v8.10.0 - support Android 5
 var firebaseConfig = {
   apiKey: "AIzaSyAyKw5JZ-VlTs8wK40E2Z6pJH_3wCSF0U8",
   authDomain: "web-store-12856.firebaseapp.com",
@@ -12,4 +13,3 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var auth = firebase.auth();
 var db = firebase.database();
-// analytics ga usah dipakai di APK biar ringan, hapus aja getAnalytics
