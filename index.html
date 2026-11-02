@@ -8,34 +8,16 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif;
-}
-body {
-    background: #111;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    height: 100dvh;
-    overflow: hidden;
-}
-input { background: transparent; border: none; outline: none; }
-button { cursor: pointer; }
-.hidden { display: none !important; }
-* { -webkit-user-select: none !important; -moz-user-select: none !important; -ms-user-select: none !important; user-select: none !important; -webkit-touch-callout: none !important; }
-img { pointer-events: none !important; -webkit-user-drag: none !important; user-drag: none !important; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif; }
+body { background: #111; display: flex; justify-content: center; align-items: center; height: 100vh; height: 100dvh; overflow: hidden; }
+input { background: transparent; border: none; outline: none; } button { cursor: pointer; } .hidden { display: none !important; }
+* { -webkit-user-select: none !important; user-select: none !important; -webkit-touch-callout: none !important; }
+img { pointer-events: none !important; -webkit-user-drag: none !important; }
 .inputBox input, .inputWrap input, #loginNama, #loginNomer, .otpBox input, #searchInp, #namaUser, #namaAdd, #nomerAdd, #bgLink, #photoLink, #roomInp { -webkit-user-select: text !important; user-select: text !important; pointer-events: auto !important; }
-html * { -webkit-tap-highlight-color: transparent !important; -webkit-tap-highlight-color: rgba(0,0,0,0) !important; tap-highlight-color: transparent !important; outline: none !important; }
-button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send { -webkit-tap-highlight-color: transparent !important; }
+html * { -webkit-tap-highlight-color: transparent !important; outline: none !important; }
 #app { width: 100%; max-width: 440px; height: 100%; background: #000; position: relative; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 0 30px rgba(0,0,0,0.8); }
-.page { position: absolute; inset: 0; display: none; flex-direction: column; background: #000; z-index: 10; }
-.page.active { display: flex; }
-.fixed-bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.4; z-index: 1; pointer-events: none; }
-.fixed-bg::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
+.page { position: absolute; inset: 0; display: none; flex-direction: column; background: #000; z-index: 10; } .page.active { display: flex; }
+.fixed-bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.4; z-index: 1; pointer-events: none; } .fixed-bg::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
 .flex { display: flex; } .column { flex-direction: column; } .center { justify-content: center; align-items: center; }
 .btn, .iconTop, .chatCard, .modalBtn, .btnLogout, .btnBack, .plus, .send, .navItem, .editDot { transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, opacity 0.15s ease-out; }
 .btn { height: 56px; background: #FFF; border: 3px solid #000; border-radius: 16px; box-shadow: 5px 5px 0 #000; font-size: 15px; font-weight: 900; text-transform: uppercase; color: #000; display: flex; justify-content: center; align-items: center; }
@@ -44,7 +26,7 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send { -
 .title-main { font-size: 28px; font-weight: 900; text-transform: uppercase; line-height: 1.1; color: #FFF; }
 .desc { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.6); margin-top: 8px; margin-bottom: 30px; }
 .form-group { display: flex; flex-direction: column; gap: 18px; margin-bottom: 24px; }
-.label { font-size: 11px; font-weight: 900; text-transform: uppercase; color: #FFF; margin-bottom: 8px; letter-spacing: 0.5px; }
+.label { font-size: 11px; font-weight: 900; text-transform: uppercase; color: #FFF; margin-bottom: 8px; }
 .inputBox { height: 56px; background: #FFF; border: 3px solid #000; border-radius: 16px; box-shadow: 5px 5px 0 #000; padding: 0 16px; display: flex; align-items: center; }
 .inputBox input { width: 100%; font-size: 15px; font-weight: 700; color: #000; }
 .otpRow { display: flex; gap: 8px; justify-content: space-between; margin-top: 24px; }
@@ -53,16 +35,14 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send { -
 .resendWrap { display: flex; justify-content: space-between; margin-top: 24px; align-items: center; }
 .resendText { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.6); }
 #resendBtn { background: transparent; border: none; font-size: 12px; font-weight: 900; color: #FFF; text-decoration: underline; text-transform: uppercase; }
-#resendBtn:disabled { color: rgba(255,255,255,0.3); text-decoration: none; cursor: not-allowed; }
+#resendBtn:disabled { color: rgba(255,255,255,0.3); text-decoration: none; }
 .btn-bottom { margin-top: auto; margin-bottom: 20px; }
 .top-nav { position: absolute; top: 0; left: 0; right: 0; height: 72px; background: #FFF; border-bottom: 3px solid #000; display: flex; justify-content: space-between; align-items: center; padding: 0 18px; z-index: 20; }
 .top-nav b { font-size: 20px; font-weight: 900; color: #000; }
 .iconTop { width: 44px; height: 44px; border: 2.5px solid #000; border-radius: 14px; background: #FFF; box-shadow: 3px 3px 0 #000; display: flex; justify-content: center; align-items: center; }
-.iconTop:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000; }
 .navWrap { position: absolute; bottom: 0; left: 0; right: 0; padding: 0 16px 16px; z-index: 20; pointer-events: none; }
 .nav { pointer-events: auto; height: 60px; background: #FFF; border: 3px solid #000; border-radius: 999px; box-shadow: 6px 6px 0 #000; display: flex; justify-content: space-between; align-items: center; padding: 0 28px; position: relative; }
 .navItem { display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; color: #000; }
-.navItem:active { transform: scale(0.92); opacity: 0.8; }
 .navItem span { font-size: 10px; font-weight: 900; text-transform: uppercase; }
 .navCenter { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -62%); width: 68px; height: 68px; border-radius: 50%; border: 3px solid #000; background: #000; box-shadow: 4px 4px 0 #000; pointer-events: none; overflow: hidden; display: flex; justify-content: center; align-items: center; }
 .navCenter img { width: 100%; height: 100%; object-fit: cover; }
@@ -70,9 +50,7 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send { -
 .searchBox { height: 46px; background: #FFF; border: 2.5px solid #000; border-radius: 999px; box-shadow: 3px 3px 0 #FFF; padding: 0 16px; display: flex; align-items: center; gap: 10px; }
 .searchBox input { flex: 1; font-size: 13px; font-weight: 700; color: #000; }
 #berandaList { position: absolute; top: 142px; bottom: 0; left: 0; right: 0; overflow-y: auto; overflow-x: hidden; padding: 0 14px 110px 14px; display: flex; flex-direction: column; gap: 14px; z-index: 10; -webkit-overflow-scrolling: touch; }
-#berandaList::-webkit-scrollbar { display: none; }
 .chatCard { width: 100%; height: 86px; background: #000; border: 2.5px solid #FFF; border-radius: 20px; box-shadow: 5px 5px 0 #FFF; display: flex; align-items: center; padding: 0 14px; gap: 14px; flex-shrink: 0; }
-.chatCard:active { transform: translate(3px, 3px); box-shadow: 2px 2px 0 #FFF; }
 .cAvatar { width: 58px; height: 58px; border-radius: 50%; border: 2.5px solid #FFF; overflow: hidden; background: #A6937C; flex-shrink: 0; }
 .cAvatar img { width: 100%; height: 100%; object-fit: cover; }
 .cMid { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
@@ -88,25 +66,21 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send { -
 .avatarBig { width: 180px; height: 180px; border-radius: 50%; background: #A6937C; border: 3px solid #000; box-shadow: 6px 6px 0 #000; overflow: hidden; }
 .avatarBig img { width: 100%; height: 100%; object-fit: cover; }
 .editDot { position: absolute; right: 2px; bottom: 8px; width: 44px; height: 44px; border-radius: 50%; background: #00FF88; border: 3px solid #000; box-shadow: 3px 3px 0 #000; display: flex; justify-content: center; align-items: center; }
-.editDot:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000; }
 .infoBox { margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; }
 #namaUser { font-size: 22px; font-weight: 900; text-transform: uppercase; color: #FFF; text-align: center; background: transparent; border: none; outline: none; width: 85%; }
 .hint { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.5); margin-top: -16px; }
 #nomerUser { font-size: 18px; font-weight: 800; color: #FFF; }
 .btnLogout { height: 52px; padding: 0 36px; background: #C49A94; border: 3px solid #000; border-radius: 999px; box-shadow: 5px 5px 0 #000; font-size: 16px; font-weight: 900; text-transform: uppercase; color: #000; display: flex; justify-content: center; align-items: center; margin-top: 10px; }
-.btnLogout:active { transform: translate(3px, 3px); box-shadow: 2px 2px 0 #000; }
 #page-room .top-room { position: absolute; top: 0; left: 0; right: 0; height: 68px; background: #FFF; border-bottom: 3px solid #000; display: flex; align-items: center; gap: 12px; padding: 0 14px; z-index: 20; }
 .btnBack { width: 40px; height: 40px; border: 2.5px solid #000; border-radius: 12px; background: #FFF; box-shadow: 2px 2px 0 #000; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
-.btnBack:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 #000; }
 .roomAvatar { width: 44px; height: 44px; border-radius: 50%; border: 2.5px solid #000; overflow: hidden; background: #A6937C; flex-shrink: 0; }
 .roomAvatar img { width: 100%; height: 100%; object-fit: cover; }
 .roomInfo { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
 #roomNama { font-size: 14px; font-weight: 900; text-transform: uppercase; color: #000; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#roomStatus { font-size: 11px; font-weight: 700; color: rgba(0,0,0,0.6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#roomMsgs { position: absolute; top: 68px; bottom: 71px; left: 0; right: 0; overflow-y: auto; overflow-x: hidden; padding: 16px 14px 20px; display: flex; flex-direction: column; gap: 12px; z-index: 10; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
-#roomMsgs::-webkit-scrollbar { display: none; }
-.bubble { max-width: 78%; border: 2.5px solid #000; border-radius: 18px; padding: 11px 14px; box-shadow: 4px 4px 0 #000; word-break: break-word; position: relative; font-size: 14px; font-weight: 600; color: #000; line-height: 1.4; }
-.bubble img { width: 100%; border-radius: 10px; border: 2px solid #000; pointer-events: none; margin-bottom: 6px; }
+#roomStatus { font-size: 11px; font-weight: 700; color: rgba(0,0,0,0.6); }
+#roomMsgs { position: absolute; top: 68px; bottom: 71px; left: 0; right: 0; overflow-y: auto; overflow-x: hidden; padding: 16px 14px 20px; display: flex; flex-direction: column; gap: 12px; z-index: 10; }
+.bubble { max-width: 78%; border: 2.5px solid #000; border-radius: 18px; padding: 11px 14px; box-shadow: 4px 4px 0 #000; word-break: break-word; font-size: 14px; font-weight: 600; color: #000; line-height: 1.4; }
+.bubble img { width: 100%; border-radius: 10px; border: 2px solid #000; margin-bottom: 6px; }
 .bubble.me { align-self: flex-end; background: #FFF; border-bottom-right-radius: 6px; }
 .bubble.other { align-self: flex-start; background: #EDE9E3; border-bottom-left-radius: 6px; }
 .bubble .time { font-size: 10px; font-weight: 800; opacity: 0.5; margin-top: 6px; display: block; text-align: right; }
@@ -115,7 +89,6 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send { -
 .inputWrap { flex: 1; height: 46px; border: 2.5px solid #000; border-radius: 999px; background: #F5F5F0; box-shadow: 3px 3px 0 #000; display: flex; align-items: center; padding: 0 16px; }
 .inputWrap input { flex: 1; font-size: 14px; font-weight: 600; color: #000; }
 .send { width: 46px; height: 46px; border: 2.5px solid #000; border-radius: 14px; background: #0A0A0A; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
-.send:active, .plus:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000; }
 .overlayModal { position: absolute; inset: 0; background: rgba(0,0,0,0.75); z-index: 100; display: none; justify-content: center; align-items: center; padding: 24px; }
 .modalCard { width: 100%; background: #FFF; border: 3px solid #000; border-radius: 20px; box-shadow: 8px 8px 0 #000; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
 .modalTitle { font-size: 18px; font-weight: 900; color: #000; text-transform: uppercase; }
@@ -123,26 +96,29 @@ button, div, a, span, img, .chatCard, .iconTop, .navItem, .btn, .plus, .send { -
 .modalInput { height: 50px; background: #FFF; border: 2.5px solid #000; border-radius: 14px; box-shadow: 3px 3px 0 #000; padding: 0 16px; font-size: 14px; font-weight: 700; color: #000; width: 100%; }
 .modalActions { display: flex; gap: 12px; margin-top: 6px; }
 .modalBtn { height: 50px; border: 2.5px solid #000; border-radius: 14px; box-shadow: 3px 3px 0 #000; font-size: 14px; font-weight: 900; text-transform: uppercase; display: flex; justify-content: center; align-items: center; flex: 1; }
-.modalBtn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000; }
 .btn-cancel { background: #FFF; color: #000; } .btn-save { background: #000; color: #FFF; } .btn-danger { background: #FF3B3B; color: #000; }
 #overlayProcess .modalCard { align-items: center; gap: 14px; padding: 30px; }
 .loader { width: 40px; height: 40px; border: 4px solid #000; border-top: 4px solid #FFF; border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
+#recaptcha-container { margin: 12px 0; display:flex; justify-content:center; min-height:78px; background:#FFF; border:3px solid #000; border-radius:16px; box-shadow:5px 5px 0 #000; padding:10px; }
 </style>
 </head>
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 <div id="app">
-<div id="page-login" class="page"><div id="loginBg" class="fixed-bg"></div><div class="wrap-auth"><b class="title-main">ALYZ<br>WHATSAPP</b><p class="desc">Nama bebas, nomer buat dicari user lain.</p><div class="form-group"><div><div class="label">Nama</div><div class="inputBox"><input type="text" id="loginNama" placeholder="CONTOH: ALYZ"></div></div><div><div class="label">Nomer</div><div class="inputBox"><input type="tel" id="loginNomer" placeholder="62xxxxxxxxxxx"></div></div></div><div id="recaptcha-container"></div><div class="btn" onclick="kirimOTP()">LANJUT</div></div></div>
-<div id="page-verify" class="page"><div class="wrap-auth" style="background: #000;"><b class="title-main">VERIFIKASI OTP</b><p class="desc" style="color: #FFF;">Kode dikirim ke <span id="nomerShow"></span></p><div class="otpRow"><div class="otpBox"><input type="text" inputmode="numeric" maxlength="1" id="o1" oninput="jump(this, 'o2')"></div><div class="otpBox"><input type="text" inputmode="numeric" maxlength="1" id="o2" oninput="jump(this, 'o3')"></div><div class="otpBox"><input type="text" inputmode="numeric" maxlength="1" id="o3" oninput="jump(this, 'o4')"></div><div class="otpBox"><input type="text" inputmode="numeric" maxlength="1" id="o4" oninput="jump(this, 'o5')"></div><div class="otpBox"><input type="text" inputmode="numeric" maxlength="1" id="o5" oninput="jump(this, 'o6')"></div><div class="otpBox"><input type="text" inputmode="numeric" maxlength="1" id="o6"></div></div><div class="resendWrap"><span class="resendText" id="timer">KIRIM ULANG (60s)</span><button id="resendBtn" disabled onclick="kirimUlang()">KIRIM ULANG</button></div><div id="recaptcha2"></div><div class="btn btn-bottom" onclick="verifikasi()">VERIFIKASI</div></div></div>
-<div id="overlayProcess" class="overlayModal"><div class="modalCard"><div class="loader"></div><b class="modalTitle">MEMPROSES</b><p class="modalDesc">Memverifikasi realtime...</p></div></div>
-<div id="page-beranda" class="page"><div id="berandaBg" class="fixed-bg"></div><div class="top-nav"><b>ALYZ WHATSAPP</b><div class="flex" style="gap: 10px;"><div class="iconTop" onclick="openModal('overlayBG')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div><div class="iconTop" onclick="openModal('overlayAdd')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div></div></div><div class="searchWrap"><div class="searchBox"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg><input type="text" id="searchInp" placeholder="Cari kontak/nomer" oninput="renderList()"></div></div><div id="berandaList"></div><div class="navWrap"><div class="nav"><div class="navItem" onclick="showPage('page-beranda')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path></svg><span>HOME</span></div><div class="navItem" onclick="showPage('page-profil')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><circle cx="12" cy="7" r="4"></circle><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path></svg><span>PROFIL</span></div><div class="navCenter"><img id="navAvatar" src="" alt=""></div></div></div></div>
-<div id="page-profil" class="page"><div id="profilBg" class="fixed-bg"></div><div class="top-profil"><b>PROFIL</b></div><div class="wrap-profil"><div class="avatarWrap"><div class="avatarBig"><img id="photoBig" src="" alt=""></div><div class="editDot" onclick="openModal('overlayPhoto')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div></div><div class="infoBox"><div class="column center"><input type="text" id="namaUser" value="NAMA USER" onblur="saveName()"><div class="hint">TAP UNTUK GANTI NAMA</div></div><div id="nomerUser">62xxxxxxxx</div><div class="btnLogout" onclick="doLogout()">LOGOUT KELUAR</div></div></div><div class="navWrap"><div class="nav"><div class="navItem" onclick="showPage('page-beranda')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path></svg><span>HOME</span></div><div class="navItem" onclick="showPage('page-profil')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><circle cx="12" cy="7" r="4"></circle><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path></svg><span>PROFIL</span></div><div class="navCenter"><img id="navAvatar2" src="" alt=""></div></div></div></div>
-<div id="page-room" class="page"><div id="roomBg" class="fixed-bg"></div><div class="top-room"><div class="btnBack" onclick="showPage('page-beranda')"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></div><div class="roomAvatar"><img id="roomAvatar" src="" alt=""></div><div class="roomInfo"><div id="roomNama">NAMA</div><div id="roomStatus">TERAKHIR DILIHAT...</div></div></div><div id="roomMsgs"></div><div class="bottom-room"><div class="plus" onclick="document.getElementById('fileInput').click()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div><input type="file" id="fileInput" class="hidden" accept="image/*" onchange="sendFile(event)"><div class="inputWrap"><input type="text" id="roomInp" placeholder="Ketik Pesan..." onkeypress="if(event.key==='Enter') sendText()"></div><div class="send" onclick="sendText()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></div></div></div>
-<div id="overlayAdd" class="overlayModal" onclick="if(event.target==this) closeModals()"><div class="modalCard"><b class="modalTitle">TAMBAH KONTAK</b><input type="text" id="namaAdd" class="modalInput" placeholder="NAMA KONTAK"><input type="tel" id="nomerAdd" class="modalInput" placeholder="62xxxxxxxx"><div class="modalActions"><div class="modalBtn btn-cancel" onclick="closeModals()">BATAL</div><div class="modalBtn btn-save" onclick="simpanKontak()">SIMPAN</div></div></div></div>
-<div id="overlayBG" class="overlayModal" onclick="if(event.target==this) closeModals()"><div class="modalCard"><b class="modalTitle">GANTI WALLPAPER</b><p class="modalDesc">Masukkan link gambar dari catbox.moe</p><input type="text" id="bgLink" class="modalInput" placeholder="https://files.catbox.moe/..."><div class="modalActions"><div class="modalBtn btn-danger" onclick="resetBG()">RESET</div><div class="modalBtn btn-save" onclick="simpanBG()">GANTI</div></div></div></div>
-<div id="overlayPhoto" class="overlayModal" onclick="if(event.target==this) closeModals()"><div class="modalCard"><b class="modalTitle">FOTO PROFIL</b><p class="modalDesc">Masukkan link gambar dari catbox.moe</p><input type="text" id="photoLink" class="modalInput" placeholder="Link catbox"><div class="modalActions"><div class="modalBtn btn-cancel" onclick="closeModals()">BATAL</div><div class="modalBtn btn-save" onclick="simpanPhoto()">SIMPAN</div></div></div></div>
+<div id="page-login" class="page"><div id="loginBg" class="fixed-bg"></div><div class="wrap-auth"><b class="title-main">ALYZ<br>WHATSAPP</b><p class="desc">Nama bebas, nomer buat dicari user lain.</p><div class="form-group"><div><div class="label">Nama</div><div class="inputBox"><input type="text" id="loginNama" placeholder="CONTOH: ALYZ"></div></div><div><div class="label">Nomer</div><div class="inputBox"><input type="tel" id="loginNomer" placeholder="62xxxxxxxxxxx"></div></div></div>
+<div id="recaptcha-container"></div>
+<div class="btn" id="btnCaptcha" style="background:#00FF88; margin-bottom:12px;" onclick="renderCaptcha()">1. KLIK VERIFIKASI CAPTCHA</div>
+<div class="btn" onclick="kirimOTP()">2. LANJUT KIRIM OTP</div>
+</div></div>
+<div id="page-verify" class="page"><div class="wrap-auth" style="background:#000;"><b class="title-main">VERIFIKASI OTP</b><p class="desc" style="color:#FFF;">Kode dikirim ke <span id="nomerShow"></span></p><div class="otpRow"><div class="otpBox"><input type="text" id="o1" oninput="jump(this,'o2')"></div><div class="otpBox"><input type="text" id="o2" oninput="jump(this,'o3')"></div><div class="otpBox"><input type="text" id="o3" oninput="jump(this,'o4')"></div><div class="otpBox"><input type="text" id="o4" oninput="jump(this,'o5')"></div><div class="otpBox"><input type="text" id="o5" oninput="jump(this,'o6')"></div><div class="otpBox"><input type="text" id="o6"></div></div><div class="resendWrap"><span class="resendText" id="timer">KIRIM ULANG (60s)</span><button id="resendBtn" disabled onclick="kirimUlang()">KIRIM ULANG</button></div><div id="recaptcha2"></div><div class="btn btn-bottom" onclick="verifikasi()">VERIFIKASI</div></div></div>
+<div id="overlayProcess" class="overlayModal"><div class="modalCard"><div class="loader"></div><b class="modalTitle">MEMPROSES</b></div></div>
+<div id="page-beranda" class="page"><div id="berandaBg" class="fixed-bg"></div><div class="top-nav"><b>ALYZ WHATSAPP</b><div class="flex" style="gap:10px;"><div class="iconTop" onclick="openModal('overlayBG')">BG</div><div class="iconTop" onclick="openModal('overlayAdd')">+</div></div></div><div class="searchWrap"><div class="searchBox"><input type="text" id="searchInp" placeholder="Cari kontak" oninput="renderList()"></div></div><div id="berandaList"></div><div class="navWrap"><div class="nav"><div class="navItem" onclick="showPage('page-beranda')"><span>HOME</span></div><div class="navItem" onclick="showPage('page-profil')"><span>PROFIL</span></div><div class="navCenter"><img id="navAvatar"></div></div></div></div>
+<div id="page-profil" class="page"><div id="profilBg" class="fixed-bg"></div><div class="top-profil"><b>PROFIL</b></div><div class="wrap-profil"><div class="avatarWrap"><div class="avatarBig"><img id="photoBig"></div><div class="editDot" onclick="openModal('overlayPhoto')">✎</div></div><div class="infoBox"><input type="text" id="namaUser" value="NAMA USER" onblur="saveName()"><div id="nomerUser">62xxx</div><div class="btnLogout" onclick="doLogout()">LOGOUT</div></div></div><div class="navWrap"><div class="nav"><div class="navItem" onclick="showPage('page-beranda')"><span>HOME</span></div><div class="navItem" onclick="showPage('page-profil')"><span>PROFIL</span></div><div class="navCenter"><img id="navAvatar2"></div></div></div></div>
+<div id="page-room" class="page"><div id="roomBg" class="fixed-bg"></div><div class="top-room"><div class="btnBack" onclick="showPage('page-beranda')">‹</div><div class="roomAvatar"><img id="roomAvatar"></div><div class="roomInfo"><div id="roomNama">NAMA</div><div id="roomStatus"></div></div></div><div id="roomMsgs"></div><div class="bottom-room"><div class="plus" onclick="document.getElementById('fileInput').click()">+</div><input type="file" id="fileInput" class="hidden" accept="image/*" onchange="sendFile(event)"><div class="inputWrap"><input type="text" id="roomInp" placeholder="Ketik Pesan..." onkeypress="if(event.key==='Enter') sendText()"></div><div class="send" onclick="sendText()">➤</div></div></div>
+<div id="overlayAdd" class="overlayModal"><div class="modalCard"><b class="modalTitle">TAMBAH KONTAK</b><input type="text" id="namaAdd" class="modalInput" placeholder="NAMA"><input type="tel" id="nomerAdd" class="modalInput" placeholder="62xxx"><div class="modalActions"><div class="modalBtn btn-cancel" onclick="closeModals()">BATAL</div><div class="modalBtn btn-save" onclick="simpanKontak()">SIMPAN</div></div></div></div>
+<div id="overlayBG" class="overlayModal"><div class="modalCard"><b class="modalTitle">WALLPAPER</b><input type="text" id="bgLink" class="modalInput"><div class="modalActions"><div class="modalBtn btn-danger" onclick="resetBG()">RESET</div><div class="modalBtn btn-save" onclick="simpanBG()">GANTI</div></div></div></div>
+<div id="overlayPhoto" class="overlayModal"><div class="modalCard"><b class="modalTitle">FOTO</b><input type="text" id="photoLink" class="modalInput"><div class="modalActions"><div class="modalBtn btn-cancel" onclick="closeModals()">BATAL</div><div class="modalBtn btn-save" onclick="simpanPhoto()">SIMPAN</div></div></div></div>
 </div>
-
 <script>
 var firebaseConfig = {
   apiKey: "AIzaSyAyKw5JZ-VlTs8wK40E2Z6pJH_3wCSF0U8",
@@ -155,283 +131,51 @@ var firebaseConfig = {
   measurementId: "G-QVLQJF61NK"
 };
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-window.auth = firebase.auth();
-window.db = firebase.database();
-
-var myId = localStorage.getItem('uid') || '';
-var myNomer = localStorage.getItem('nomer') || '';
-var currentTargetNomer = '';
-var allContacts = [];
-var chatsMeta = {};
-var usersMeta = {};
-var timerInt;
-var lastSeenTimeout;
-var appEl = document.getElementById('app');
-var roomInp = document.getElementById('roomInp');
-var roomMsgs = document.getElementById('roomMsgs');
-
-if(window.visualViewport) {
-    window.visualViewport.addEventListener('resize', function(){
-        appEl.style.height = window.visualViewport.height + 'px';
-        if(roomMsgs) roomMsgs.scrollTop = roomMsgs.scrollHeight;
-    });
-}
-roomInp.addEventListener('focus', function(){
-    setTimeout(function(){ roomMsgs.scrollTop = roomMsgs.scrollHeight; }, 300);
-});
-function showPage(id) {
-    var pages = document.querySelectorAll('.page');
-    for (var i=0; i<pages.length; i++) { pages[i].classList.remove('active'); }
-    document.getElementById(id).classList.add('active');
-    if (id === 'page-beranda') renderList();
-}
-function applyBG() {
-    var defaultBg = "https://files.catbox.moe/0v1r5p.jpg";
-    var bWall = localStorage.getItem('berandaWall') || defaultBg;
-    var cWall = localStorage.getItem('wall') || defaultBg;
-    document.getElementById('loginBg').style.backgroundImage = 'url(' + defaultBg + ')';
-    document.getElementById('berandaBg').style.backgroundImage = 'url(' + bWall + ')';
-    document.getElementById('profilBg').style.backgroundImage = 'url(' + bWall + ')';
-    document.getElementById('roomBg').style.backgroundImage = 'url(' + cWall + ')';
-}
-function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-function closeModals() { var modals = document.querySelectorAll('.overlayModal'); for(var i=0; i<modals.length; i++) modals[i].style.display = 'none'; }
-function resetBG() { localStorage.removeItem('berandaWall'); localStorage.removeItem('wall'); applyBG(); closeModals(); }
-function simpanBG() { var link = document.getElementById('bgLink').value; if(link){ localStorage.setItem('berandaWall', link); localStorage.setItem('wall', link); applyBG(); } closeModals(); }
-function simpanPhoto() { var link = document.getElementById('photoLink').value; if(link && myId) { db.ref('users/' + myId).update({photo: link}); } closeModals(); }
-function simpanKontak() {
-    var nama = document.getElementById('namaAdd').value;
-    var nomer = document.getElementById('nomerAdd').value;
-    if(nama && nomer && myId){
-        if(nomer.indexOf('62') !== 0) nomer = '62' + nomer;
-        db.ref('contacts/' + myId).push({nama: nama, nomer: nomer, created: Date.now()});
-    }
-    closeModals(); 
-    document.getElementById('namaAdd').value = ''; 
-    document.getElementById('nomerAdd').value = '';
-}
-function saveName() { var newName = document.getElementById('namaUser').value; if(newName && myId) { db.ref('users/' + myId).update({name: newName}); } }
-function jump(curr, nextId) { if(curr.value.length >= 1) document.getElementById(nextId).focus(); }
-function formatPhone(num) { num = num.replace(/\D/g, ''); if(num.indexOf('0') === 0) num = '62' + num.substring(1); if(num.indexOf('62') !== 0) num = '62' + num; return num; }
-
-// FIX RECAPTCHA INVISIBLE - GA POPUP MULU
-function kirimOTP() {
-    var nama = document.getElementById('loginNama').value; 
-    var nomer = document.getElementById('loginNomer').value;
-    if(!nama || !nomer) return alert('Silakan isi nama dan nomer dengan benar.');
-    nomer = formatPhone(nomer);
-    localStorage.setItem('tempNama', nama); 
-    localStorage.setItem('tempNomer', nomer);
-    var phoneForAuth = '+' + nomer;
-    var container = document.getElementById('recaptcha-container');
-    container.innerHTML = "";
+window.auth = firebase.auth(); window.db = firebase.database();
+var myId = localStorage.getItem('uid') || ''; var myNomer = localStorage.getItem('nomer') || ''; var currentTargetNomer = ''; var allContacts = []; var chatsMeta = {}; var usersMeta = {}; var timerInt; var lastSeenTimeout; var captchaRendered = false;
+var appEl = document.getElementById('app'); var roomInp = document.getElementById('roomInp'); var roomMsgs = document.getElementById('roomMsgs');
+function showPage(id){ var pages=document.querySelectorAll('.page'); for(var i=0;i<pages.length;i++) pages[i].classList.remove('active'); document.getElementById(id).classList.add('active'); if(id==='page-beranda') renderList(); }
+function applyBG(){ var defaultBg="https://files.catbox.moe/0v1r5p.jpg"; var bWall=localStorage.getItem('berandaWall')||defaultBg; var cWall=localStorage.getItem('wall')||defaultBg; document.getElementById('loginBg').style.backgroundImage='url('+defaultBg+')'; document.getElementById('berandaBg').style.backgroundImage='url('+bWall+')'; document.getElementById('profilBg').style.backgroundImage='url('+bWall+')'; document.getElementById('roomBg').style.backgroundImage='url('+cWall+')'; }
+function openModal(id){ document.getElementById(id).style.display='flex'; } function closeModals(){ var modals=document.querySelectorAll('.overlayModal'); for(var i=0;i<modals.length;i++) modals[i].style.display='none'; }
+function resetBG(){ localStorage.removeItem('berandaWall'); localStorage.removeItem('wall'); applyBG(); closeModals(); }
+function simpanBG(){ var link=document.getElementById('bgLink').value; if(link){ localStorage.setItem('berandaWall', link); localStorage.setItem('wall', link); applyBG(); } closeModals(); }
+function simpanPhoto(){ var link=document.getElementById('photoLink').value; if(link && myId){ db.ref('users/'+myId).update({photo:link}); } closeModals(); }
+function simpanKontak(){ var nama=document.getElementById('namaAdd').value; var nomer=document.getElementById('nomerAdd').value; if(nama&&nomer&&myId){ if(nomer.indexOf('62')!==0) nomer='62'+nomer; db.ref('contacts/'+myId).push({nama:nama,nomer:nomer,created:Date.now()}); } closeModals(); document.getElementById('namaAdd').value=''; document.getElementById('nomerAdd').value=''; }
+function saveName(){ var newName=document.getElementById('namaUser').value; if(newName&&myId){ db.ref('users/'+myId).update({name:newName}); } }
+function jump(curr,nextId){ if(curr.value.length>=1) document.getElementById(nextId).focus(); }
+function formatPhone(num){ num=num.replace(/\D/g,''); if(num.indexOf('0')===0) num='62'+num.substring(1); if(num.indexOf('62')!==0) num='62'+num; return num; }
+function renderCaptcha(){
+    var container=document.getElementById('recaptcha-container');
+    container.innerHTML="";
     if(window.recaptchaVerifier){ try{ window.recaptchaVerifier.clear(); }catch(e){} }
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-        size: 'invisible',
-        callback: function(response){}
+        size: 'normal',
+        callback: function(response){ captchaRendered=true; document.getElementById('btnCaptcha').innerText="✅ CAPTCHA OK - KLIK LANJUT"; document.getElementById('btnCaptcha').style.background="#FFF"; },
+        'expired-callback': function(){ captchaRendered=false; document.getElementById('btnCaptcha').innerText="1. KLIK VERIFIKASI CAPTCHA LAGI"; document.getElementById('btnCaptcha').style.background="#00FF88"; }
     });
-    window.recaptchaVerifier.render().then(function(){
-        auth.signInWithPhoneNumber(phoneForAuth, window.recaptchaVerifier).then(function(res) {
-            window.confirmationResult = res;
-            document.getElementById('nomerShow').innerText = phoneForAuth;
-            showPage('page-verify'); 
-            startTimer();
-        }).catch(function(err) { 
-            alert('Error: ' + err.message);
-            try{ window.recaptchaVerifier.clear(); }catch(e){}
-            document.getElementById('recaptcha-container').innerHTML = "";
-        });
-    });
+    window.recaptchaVerifier.render();
 }
-function startTimer() {
-    var count = 60; 
-    document.getElementById('resendBtn').disabled = true; 
-    clearInterval(timerInt);
-    timerInt = setInterval(function(){
-        count--; 
-        document.getElementById('timer').innerText = "KIRIM ULANG (" + count + "s)";
-        if(count <= 0){ clearInterval(timerInt); document.getElementById('timer').innerText = ""; document.getElementById('resendBtn').disabled = false; }
-    }, 1000);
+function kirimOTP(){
+    if(!captchaRendered){ alert('Klik VERIFIKASI CAPTCHA dulu dan centang Saya bukan robot!'); renderCaptcha(); return; }
+    var nama=document.getElementById('loginNama').value; var nomer=document.getElementById('loginNomer').value;
+    if(!nama||!nomer) return alert('Isi nama dan nomer.');
+    nomer=formatPhone(nomer); localStorage.setItem('tempNama', nama); localStorage.setItem('tempNomer', nomer);
+    var phoneForAuth='+'+nomer;
+    auth.signInWithPhoneNumber(phoneForAuth, window.recaptchaVerifier).then(function(res){ window.confirmationResult=res; document.getElementById('nomerShow').innerText=phoneForAuth; showPage('page-verify'); startTimer(); }).catch(function(err){ alert('Error: '+err.message); captchaRendered=false; renderCaptcha(); });
 }
-function kirimUlang() {
-    var phoneForAuth = '+' + localStorage.getItem('tempNomer');
-    var container2 = document.getElementById('recaptcha2');
-    container2.innerHTML = "";
-    if(window.recaptchaVerifier2){ try{ window.recaptchaVerifier2.clear(); }catch(e){} }
-    window.recaptchaVerifier2 = new firebase.auth.RecaptchaVerifier('recaptcha2', { size: 'invisible' });
-    window.recaptchaVerifier2.render().then(function(){
-        auth.signInWithPhoneNumber(phoneForAuth, window.recaptchaVerifier2).then(function(res) {
-            window.confirmationResult = res; 
-            startTimer();
-        }).catch(function(err){ alert(err.message); });
-    });
-}
-function verifikasi() {
-    var code = ''; 
-    for(var i=1; i<=6; i++) { code += document.getElementById('o'+i).value; }
-    if(code.length < 6) return alert('Kode OTP tidak lengkap!');
-    document.getElementById('overlayProcess').style.display = 'flex';
-    window.confirmationResult.confirm(code).then(function(result) {
-        var user = result.user; 
-        myId = user.uid; 
-        myNomer = localStorage.getItem('tempNomer'); 
-        var nama = localStorage.getItem('tempNama');
-        localStorage.setItem('uid', myId); 
-        localStorage.setItem('nomer', myNomer);
-        db.ref('users/' + myId).update({ uid: myId, name: nama, nomer: '+' + myNomer, online: true, lastSeen: firebase.database.ServerValue.TIMESTAMP, createdAt: Date.now() }).then(function(){
-            document.getElementById('overlayProcess').style.display = 'none'; 
-            showPage('page-beranda'); 
-            initApp();
-        });
-    }).catch(function(err) { 
-        document.getElementById('overlayProcess').style.display = 'none'; 
-        alert('Kode salah: ' + err.message); 
-    });
-}
-function doLogout() {
-    if(myId) { db.ref('users/' + myId).update({online: false, lastSeen: firebase.database.ServerValue.TIMESTAMP}); }
-    auth.signOut(); localStorage.clear(); myId = ''; myNomer = ''; showPage('page-login');
-}
-function setOnlineStatus() {
-    if(!myId) return; 
-    var ref = db.ref('users/' + myId);
-    ref.update({online: true}); 
-    ref.onDisconnect().update({online: false, lastSeen: firebase.database.ServerValue.TIMESTAMP});
-    clearTimeout(lastSeenTimeout); 
-    lastSeenTimeout = setInterval(function(){ ref.update({lastSeen: firebase.database.ServerValue.TIMESTAMP}); }, 60000);
-}
-function initApp() {
-    if(!myId) return; 
-    setOnlineStatus(); applyBG();
-    db.ref('users/' + myId).on('value', function(snap){
-        var data = snap.val();
-        if(data){
-            var p = data.photo || 'https://files.catbox.moe/0v1r5p.jpg';
-            document.getElementById('navAvatar').src = p; 
-            document.getElementById('navAvatar2').src = p;
-            document.getElementById('photoBig').src = p; 
-            document.getElementById('namaUser').value = data.name || '';
-            document.getElementById('nomerUser').innerText = data.nomer || '';
-        }
-    });
-    db.ref('contacts/' + myId).on('value', function(snap){
-        allContacts = []; 
-        snap.forEach(function(child){ var c = child.val(); allContacts.push(c); listenUserAndChat(c.nomer); });
-        renderList();
-    });
-}
-function listenUserAndChat(targetNomer) {
-    db.ref('users').orderByChild('nomer').equalTo('+' + targetNomer).on('value', function(snap){
-        var found = false; 
-        snap.forEach(function(child){ usersMeta[targetNomer] = child.val(); found = true; });
-        if(!found && !usersMeta[targetNomer]) { usersMeta[targetNomer] = {name: 'Tidak Diketahui', photo: ''}; } 
-        renderList();
-    });
-    var chatId = myId + '_' + targetNomer;
-    db.ref('chats/' + chatId + '/messages').orderByChild('ts').limitToLast(1).on('value', function(snap){
-        var lastMsg = ''; var lastTime = '';
-        snap.forEach(function(child){
-            var m = child.val(); 
-            lastMsg = m.type === 'image' ? '[Gambar Terkirim]' : m.text; 
-            var dt = new Date(m.ts);
-            lastTime = dt.getHours().toString().padStart(2,'0') + ':' + dt.getMinutes().toString().padStart(2,'0');
-        });
-        if(!chatsMeta[targetNomer]) chatsMeta[targetNomer] = {unread: 0};
-        chatsMeta[targetNomer].lastMsg = lastMsg; 
-        chatsMeta[targetNomer].lastTime = lastTime; 
-        renderList();
-    });
-    db.ref('chats/' + chatId + '/messages').on('value', function(snap){
-        var count = 0; 
-        snap.forEach(function(child){ var m = child.val(); if(m.uid !== myId && !m.read) count++; });
-        if(!chatsMeta[targetNomer]) chatsMeta[targetNomer] = {}; 
-        chatsMeta[targetNomer].unread = count; 
-        renderList();
-    });
-}
-function renderList() {
-    var search = (document.getElementById('searchInp').value || '').toLowerCase();
-    var listEl = document.getElementById('berandaList'); 
-    var html = '';
-    for (var i=0; i<allContacts.length; i++) {
-        var c = allContacts[i]; 
-        var metaU = usersMeta[c.nomer] || {}; 
-        var metaC = chatsMeta[c.nomer] || {unread: 0, lastMsg: '', lastTime: ''};
-        var dName = c.nama || metaU.name || c.nomer;
-        if (search && dName.toLowerCase().indexOf(search) === -1 && c.nomer.indexOf(search) === -1) continue;
-        var photo = metaU.photo || 'https://files.catbox.moe/0v1r5p.jpg';
-        var badgeHtml = metaC.unread > 0 ? '<div class="cBadge">' + metaC.unread + '</div>' : '';
-        html += '<div class="chatCard" onclick="openRoom(\'' + c.nomer + '\')"><div class="cAvatar"><img src="' + photo + '"></div><div class="cMid"><div class="cName">' + dName + '</div><div class="cMsg">' + (metaC.lastMsg || 'Belum ada obrolan') + '</div></div><div class="cRight">' + badgeHtml + '<div class="cTime">' + (metaC.lastTime || '') + '</div></div></div>';
-    }
-    listEl.innerHTML = html;
-}
+function startTimer(){ var count=60; document.getElementById('resendBtn').disabled=true; clearInterval(timerInt); timerInt=setInterval(function(){ count--; document.getElementById('timer').innerText="KIRIM ULANG ("+count+"s)"; if(count<=0){ clearInterval(timerInt); document.getElementById('timer').innerText=""; document.getElementById('resendBtn').disabled=false; } },1000); }
+function kirimUlang(){ var phoneForAuth='+'+localStorage.getItem('tempNomer'); var container2=document.getElementById('recaptcha2'); container2.innerHTML=""; if(window.recaptchaVerifier2){ try{ window.recaptchaVerifier2.clear(); }catch(e){} } window.recaptchaVerifier2=new firebase.auth.RecaptchaVerifier('recaptcha2',{size:'invisible'}); window.recaptchaVerifier2.render().then(function(){ auth.signInWithPhoneNumber(phoneForAuth, window.recaptchaVerifier2).then(function(res){ window.confirmationResult=res; startTimer(); }).catch(function(err){ alert(err.message); }); }); }
+function verifikasi(){ var code=''; for(var i=1;i<=6;i++){ code+=document.getElementById('o'+i).value; } if(code.length<6) return alert('Kode OTP tidak lengkap!'); document.getElementById('overlayProcess').style.display='flex'; window.confirmationResult.confirm(code).then(function(result){ var user=result.user; myId=user.uid; myNomer=localStorage.getItem('tempNomer'); var nama=localStorage.getItem('tempNama'); localStorage.setItem('uid', myId); localStorage.setItem('nomer', myNomer); db.ref('users/'+myId).update({ uid:myId, name:nama, nomer:'+'+myNomer, online:true, lastSeen:firebase.database.ServerValue.TIMESTAMP, createdAt:Date.now() }).then(function(){ document.getElementById('overlayProcess').style.display='none'; showPage('page-beranda'); initApp(); }); }).catch(function(err){ document.getElementById('overlayProcess').style.display='none'; alert('Kode salah: '+err.message); }); }
+function doLogout(){ if(myId){ db.ref('users/'+myId).update({online:false, lastSeen:firebase.database.ServerValue.TIMESTAMP}); } auth.signOut(); localStorage.clear(); myId=''; myNomer=''; captchaRendered=false; showPage('page-login'); }
+function setOnlineStatus(){ if(!myId) return; var ref=db.ref('users/'+myId); ref.update({online:true}); ref.onDisconnect().update({online:false, lastSeen:firebase.database.ServerValue.TIMESTAMP}); clearTimeout(lastSeenTimeout); lastSeenTimeout=setInterval(function(){ ref.update({lastSeen:firebase.database.ServerValue.TIMESTAMP}); },60000); }
+function initApp(){ if(!myId) return; setOnlineStatus(); applyBG(); db.ref('users/'+myId).on('value',function(snap){ var data=snap.val(); if(data){ var p=data.photo||'https://files.catbox.moe/0v1r5p.jpg'; document.getElementById('navAvatar').src=p; document.getElementById('navAvatar2').src=p; document.getElementById('photoBig').src=p; document.getElementById('namaUser').value=data.name||''; document.getElementById('nomerUser').innerText=data.nomer||''; } }); db.ref('contacts/'+myId).on('value',function(snap){ allContacts=[]; snap.forEach(function(child){ var c=child.val(); allContacts.push(c); listenUserAndChat(c.nomer); }); renderList(); }); }
+function listenUserAndChat(targetNomer){ db.ref('users').orderByChild('nomer').equalTo('+'+targetNomer).on('value',function(snap){ var found=false; snap.forEach(function(child){ usersMeta[targetNomer]=child.val(); found=true; }); if(!found&&!usersMeta[targetNomer]){ usersMeta[targetNomer]={name:'Tidak Diketahui', photo:''}; } renderList(); }); var chatId=myId+'_'+targetNomer; db.ref('chats/'+chatId+'/messages').orderByChild('ts').limitToLast(1).on('value',function(snap){ var lastMsg=''; var lastTime=''; snap.forEach(function(child){ var m=child.val(); lastMsg=m.type==='image'?'[Gambar]':m.text; var dt=new Date(m.ts); lastTime=dt.getHours().toString().padStart(2,'0')+':'+dt.getMinutes().toString().padStart(2,'0'); }); if(!chatsMeta[targetNomer]) chatsMeta[targetNomer]={unread:0}; chatsMeta[targetNomer].lastMsg=lastMsg; chatsMeta[targetNomer].lastTime=lastTime; renderList(); }); db.ref('chats/'+chatId+'/messages').on('value',function(snap){ var count=0; snap.forEach(function(child){ var m=child.val(); if(m.uid!==myId&&!m.read) count++; }); if(!chatsMeta[targetNomer]) chatsMeta[targetNomer]={}; chatsMeta[targetNomer].unread=count; renderList(); }); }
+function renderList(){ var search=(document.getElementById('searchInp').value||'').toLowerCase(); var listEl=document.getElementById('berandaList'); var html=''; for(var i=0;i<allContacts.length;i++){ var c=allContacts[i]; var metaU=usersMeta[c.nomer]||{}; var metaC=chatsMeta[c.nomer]||{unread:0,lastMsg:'',lastTime:''}; var dName=c.nama||metaU.name||c.nomer; if(search&&dName.toLowerCase().indexOf(search)===-1&&c.nomer.indexOf(search)===-1) continue; var photo=metaU.photo||'https://files.catbox.moe/0v1r5p.jpg'; var badgeHtml=metaC.unread>0?'<div class="cBadge">'+metaC.unread+'</div>':''; html+='<div class="chatCard" onclick="openRoom(\''+c.nomer+'\')"><div class="cAvatar"><img src="'+photo+'"></div><div class="cMid"><div class="cName">'+dName+'</div><div class="cMsg">'+(metaC.lastMsg||'Belum ada obrolan')+'</div></div><div class="cRight">'+badgeHtml+'<div class="cTime">'+(metaC.lastTime||'')+'</div></div></div>'; } listEl.innerHTML=html; }
 var roomMsgsRef;
-function openRoom(targetNomer) {
-    currentTargetNomer = targetNomer; 
-    var metaU = usersMeta[targetNomer] || {}; 
-    var dName = metaU.name || targetNomer; 
-    var photo = metaU.photo || 'https://files.catbox.moe/0v1r5p.jpg';
-    document.getElementById('roomNama').innerText = dName; 
-    document.getElementById('roomAvatar').src = photo;
-    if (metaU.online) { document.getElementById('roomStatus').innerText = 'ONLINE'; }
-    else { var dt = metaU.lastSeen ? new Date(metaU.lastSeen) : new Date(); document.getElementById('roomStatus').innerText = 'TERAKHIR DILIHAT ' + dt.getHours().toString().padStart(2,'0') + ':' + dt.getMinutes().toString().padStart(2,'0'); }
-    var chatId = myId + '_' + targetNomer; 
-    roomMsgs.innerHTML = ''; 
-    if(roomMsgsRef) roomMsgsRef.off();
-    roomMsgsRef = db.ref('chats/' + chatId + '/messages');
-    roomMsgsRef.on('child_added', function(snap){
-        var msg = snap.val(); 
-        var key = snap.key;
-        if (msg.uid !== myId && !msg.read) { db.ref('chats/' + chatId + '/messages/' + key).update({read: true}); }
-        var dt = new Date(msg.ts); 
-        var timeStr = dt.getHours().toString().padStart(2,'0') + ':' + dt.getMinutes().toString().padStart(2,'0');
-        var isMe = msg.uid === myId; 
-        var cls = isMe ? 'me' : 'other';
-        var div = document.createElement('div'); 
-        div.className = 'bubble ' + cls;
-        var content = ''; 
-        if (msg.type === 'image') { content = '<img src="' + msg.data + '">'; }
-        content += msg.text || ''; 
-        content += '<span class="time">' + timeStr + '</span>';
-        div.innerHTML = content; 
-        roomMsgs.appendChild(div);
-        setTimeout(function(){ roomMsgs.scrollTop = roomMsgs.scrollHeight; }, 100);
-    });
-    showPage('page-room'); 
-    setTimeout(function(){ roomMsgs.scrollTop = roomMsgs.scrollHeight; }, 300);
-}
-function sendText() {
-    var inp = document.getElementById('roomInp'); 
-    var text = inp.value.trim(); 
-    if(!text || !currentTargetNomer) return; 
-    inp.value = '';
-    var chatId = myId + '_' + currentTargetNomer;
-    db.ref('users').orderByChild('nomer').equalTo('+' + currentTargetNomer).once('value').then(function(snap){
-        var targetUid = ''; 
-        snap.forEach(function(child){ targetUid = child.val().uid; });
-        var msgData = { uid: myId, text: text, type: 'text', ts: Date.now(), read: false };
-        db.ref('chats/' + chatId + '/messages').push(msgData);
-        if (targetUid) { var chatIdRev = targetUid + '_' + myNomer; db.ref('chats/' + chatIdRev + '/messages').push(msgData); }
-    });
-}
-function sendFile(e) {
-    var file = e.target.files[0]; 
-    if(!file || !currentTargetNomer) return; 
-    var reader = new FileReader();
-    reader.onload = function(evt) {
-        var base64 = evt.target.result; 
-        var chatId = myId + '_' + currentTargetNomer;
-        db.ref('users').orderByChild('nomer').equalTo('+' + currentTargetNomer).once('value').then(function(snap){
-            var targetUid = ''; 
-            snap.forEach(function(child){ targetUid = child.val().uid; });
-            var msgData = { uid: myId, text: '', type: 'image', data: base64, ts: Date.now(), read: false };
-            db.ref('chats/' + chatId + '/messages').push(msgData);
-            if (targetUid) { var chatIdRev = targetUid + '_' + myNomer; db.ref('chats/' + chatIdRev + '/messages').push(msgData); }
-        });
-    }; 
-    reader.readAsDataURL(file);
-}
-if (localStorage.getItem('uid')) { initApp(); showPage('page-beranda'); } else { showPage('page-login'); applyBG(); }
+function openRoom(targetNomer){ currentTargetNomer=targetNomer; var metaU=usersMeta[targetNomer]||{}; var dName=metaU.name||targetNomer; var photo=metaU.photo||'https://files.catbox.moe/0v1r5p.jpg'; document.getElementById('roomNama').innerText=dName; document.getElementById('roomAvatar').src=photo; if(metaU.online){ document.getElementById('roomStatus').innerText='ONLINE'; } else { var dt=metaU.lastSeen?new Date(metaU.lastSeen):new Date(); document.getElementById('roomStatus').innerText='TERAKHIR DILIHAT '+dt.getHours().toString().padStart(2,'0')+':'+dt.getMinutes().toString().padStart(2,'0'); } var chatId=myId+'_'+targetNomer; roomMsgs.innerHTML=''; if(roomMsgsRef) roomMsgsRef.off(); roomMsgsRef=db.ref('chats/'+chatId+'/messages'); roomMsgsRef.on('child_added',function(snap){ var msg=snap.val(); var key=snap.key; if(msg.uid!==myId&&!msg.read){ db.ref('chats/'+chatId+'/messages/'+key).update({read:true}); } var dt=new Date(msg.ts); var timeStr=dt.getHours().toString().padStart(2,'0')+':'+dt.getMinutes().toString().padStart(2,'0'); var isMe=msg.uid===myId; var cls=isMe?'me':'other'; var div=document.createElement('div'); div.className='bubble '+cls; var content=''; if(msg.type==='image'){ content='<img src="'+msg.data+'">'; } content+=msg.text||''; content+='<span class="time">'+timeStr+'</span>'; div.innerHTML=content; roomMsgs.appendChild(div); setTimeout(function(){ roomMsgs.scrollTop=roomMsgs.scrollHeight; },100); }); showPage('page-room'); setTimeout(function(){ roomMsgs.scrollTop=roomMsgs.scrollHeight; },300); }
+function sendText(){ var inp=document.getElementById('roomInp'); var text=inp.value.trim(); if(!text||!currentTargetNomer) return; inp.value=''; var chatId=myId+'_'+currentTargetNomer; db.ref('users').orderByChild('nomer').equalTo('+'+currentTargetNomer).once('value').then(function(snap){ var targetUid=''; snap.forEach(function(child){ targetUid=child.val().uid; }); var msgData={ uid:myId, text:text, type:'text', ts:Date.now(), read:false }; db.ref('chats/'+chatId+'/messages').push(msgData); if(targetUid){ var chatIdRev=targetUid+'_'+myNomer; db.ref('chats/'+chatIdRev+'/messages').push(msgData); } }); }
+function sendFile(e){ var file=e.target.files[0]; if(!file||!currentTargetNomer) return; var reader=new FileReader(); reader.onload=function(evt){ var base64=evt.target.result; var chatId=myId+'_'+currentTargetNomer; db.ref('users').orderByChild('nomer').equalTo('+'+currentTargetNomer).once('value').then(function(snap){ var targetUid=''; snap.forEach(function(child){ targetUid=child.val().uid; }); var msgData={ uid:myId, text:'', type:'image', data:base64, ts:Date.now(), read:false }; db.ref('chats/'+chatId+'/messages').push(msgData); if(targetUid){ var chatIdRev=targetUid+'_'+myNomer; db.ref('chats/'+chatIdRev+'/messages').push(msgData); } }); }; reader.readAsDataURL(file); }
+if(localStorage.getItem('uid')){ initApp(); showPage('page-beranda'); } else { showPage('page-login'); applyBG(); renderCaptcha(); }
 </script>
 </body>
 </html>
